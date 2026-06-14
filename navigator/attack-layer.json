@@ -1,1 +1,31 @@
-
+{
+  "name": "Ransomware Attack Chain — SOC Portfolio",
+  "versions": {
+    "attack": "14",
+    "navigator": "4.9",
+    "layer": "4.5"
+  },
+  "domain": "enterprise-attack",
+  "description": "MITRE ATT&CK mapping for ransomware attack scenario. Red = confirmed technique, Yellow = suspected, Green = detection exists.",
+  "techniques": [
+    { "techniqueID": "T1566.001", "tactic": "initial-access", "color": "#ff0000", "comment": "Phishing email with Word doc delivered to victim", "enabled": true },
+    { "techniqueID": "T1204.002", "tactic": "execution", "color": "#ff0000", "comment": "Victim opened malicious file", "enabled": true },
+    { "techniqueID": "T1059.001", "tactic": "execution", "color": "#ff0000", "comment": "PowerShell used to download payload", "enabled": true },
+    { "techniqueID": "T1547.001", "tactic": "persistence", "color": "#ff6600", "comment": "Registry Run key added for persistence", "enabled": true },
+    { "techniqueID": "T1562.001", "tactic": "defense-evasion", "color": "#ff6600", "comment": "Windows Defender disabled", "enabled": true },
+    { "techniqueID": "T1003.001", "tactic": "credential-access", "color": "#ff0000", "comment": "Mimikatz used to dump LSASS", "enabled": true },
+    { "techniqueID": "T1550.002", "tactic": "lateral-movement", "color": "#ff0000", "comment": "Pass-the-hash to file server", "enabled": true },
+    { "techniqueID": "T1486", "tactic": "impact", "color": "#ff0000", "comment": "Files encrypted — ransom demand made", "enabled": true },
+    { "techniqueID": "T1490", "tactic": "impact", "color": "#ff0000", "comment": "vssadmin delete shadows executed", "enabled": true }
+  ],
+  "gradient": {
+    "colors": ["#ff6666", "#ff0000"],
+    "minValue": 0,
+    "maxValue": 100
+  },
+  "legendItems": [
+    { "label": "Confirmed Technique", "color": "#ff0000" },
+    { "label": "Suspected Technique", "color": "#ff6600" },
+    { "label": "Detection Exists", "color": "#00aa00" }
+  ]
+}
