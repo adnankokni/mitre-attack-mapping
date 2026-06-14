@@ -1,1 +1,56 @@
+<!-- ================================================ -->
+<!-- Wazuh Rules with MITRE ATT&CK Mapping           -->
+<!-- Author: adnankokni | SOC Analyst Portfolio       -->
+<!-- ================================================ -->
 
+<group name="mitre,local">
+
+  <!-- T1059.001 — PowerShell Encoded Command -->
+  <rule id="200001" level="12">
+    <if_sid>60910</if_sid>
+    <field name="win.eventdata.commandLine" type="pcre2">
+      (?i)powershell.*(-enc|-encodedcommand)
+    </field>
+    <description>MITRE T1059.001: Encoded PowerShell — possible obfuscation</description>
+    <mitre><id>T1059.001</id></mitre>
+    <group>execution,obfuscation</group>
+  </rule>
+
+  <!-- T1110 — Brute Force SSH -->
+  <rule id="200002" level="10" frequency="6" timeframe="120">
+    <if_matched_sid>5716</if_matched_sid>
+    <same_source_ip />
+    <description>MITRE T1110: SSH brute force — 6 failures in 2 minutes</description>
+    <mitre><id>T1110</id></mitre>
+    <group>credential_access,brute_force</group>
+  </rule>
+
+  <!-- T1136 — New User Account Created -->
+  <rule id="200003" level="8">
+    <if_sid>5901</if_sid>
+    <description>MITRE T1136: New local user account created</description>
+    <mitre><id>T1136.001</id></mitre>
+    <group>persistence,account_management</group>
+  </rule>
+
+  <!-- T1490 — Shadow Copy Deletion (Ransomware) -->
+  <rule id="200004" level="15">
+    <if_sid>60910</if_sid>
+    <field name="win.eventdata.commandLine" type="pcre2">
+      (?i)vssadmin.*delete.*shadows
+    </field>
+    <description>MITRE T1490: Shadow copy deletion — CRITICAL ransomware indicator</description>
+    <mitre><id>T1490</id></mitre>
+    <group>impact,ransomware</group>
+  </rule>
+
+  <!-- T1548.003 — Sudo Privilege Escalation -->
+  <rule id="200005" level="12">
+    <if_sid>5402</if_sid>
+    <match>sudo</match>
+    <description>MITRE T1548.003: Sudo privilege escalation attempt</description>
+    <mitre><id>T1548.003</id></mitre>
+    <group>privilege_escalation</group>
+  </rule>
+
+</group>
