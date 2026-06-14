@@ -106,7 +106,6 @@ to visualise all mapped techniques.
 
 ## 🔗 Related Portfolio Projects
 
-- [Wazuh SOC Monitoring Lab](https://github.com/adnankokni/wazuh-soc-monitoring-lab)
 - [Incident Response Playbook](https://github.com/adnankokni/incident-response-playbook)
 
 ---
