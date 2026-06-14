@@ -1,1 +1,25 @@
-
+title: SSH Brute Force Attack
+id: b3c5d7e9-2345-6789-bcde-f01234567890
+status: stable
+description: >
+  Detects multiple failed SSH authentication attempts from a single source,
+  indicating a brute force attack. Maps to MITRE T1110.
+references:
+  - https://attack.mitre.org/techniques/T1110/
+author: adnankokni
+date: 2025/01/01
+tags:
+  - attack.credential_access
+  - attack.t1110
+logsource:
+  product: linux
+  service: auth
+detection:
+  keywords:
+    - 'Failed password'
+    - 'Invalid user'
+  timeframe: 2m
+  condition: keywords | count() > 5
+falsepositives:
+  - Legitimate users forgetting passwords
+level: medium
